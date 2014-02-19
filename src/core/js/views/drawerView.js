@@ -62,7 +62,7 @@ define(function(require) {
 			}
 		},
 
-		showDrawer: function(emptyDrawer) {
+		/*showDrawer: function(emptyDrawer) {
 			Adapt.trigger('popup:opened');
 			$('html').css('overflow-y', 'visible');
 			$('body').css({'position':'relative', 'overflow': 'hidden'}).animate({"left":-320});
@@ -74,6 +74,42 @@ define(function(require) {
 				this.emptyDrawer();
 				this.renderItems();
 			}
+		},*/
+
+		showDrawer: function(emptyDrawer) {
+			Adapt.trigger('popup:opened');
+
+			$('html, body').addClass('drawer-open');
+
+			if (!Modernizr.csstransitions) {
+				$('body').animate({"left":-320});
+				if (!$('html').hasClass('ie8')) {
+					$('.navigation').animate({"left": -320});
+				}
+				this.$el.animate({'right': 0});
+			}
+
+			if (emptyDrawer) {
+				this.emptyDrawer();
+				this.renderItems();
+			}
+		},
+
+		hideDrawer: function() {
+			Adapt.trigger('popup:closed');
+
+			$('html, body').removeClass('drawer-open');
+
+			if (!Modernizr.csstransitions) {
+				if ($('html').hasClass('ie8')) {
+					$('body').css({"left":0});
+					$(this).css({'position':'static', 'overflow': 'visible'});
+					this.$el.css({'right': -320});
+				} else {
+					$('.navigation').css({"left": 0});
+					$('body').css({"left":0});
+				}
+			}
 		},
 
 		emptyDrawer: function() {
@@ -84,12 +120,11 @@ define(function(require) {
 			this.collection.each(function(item) {
 				new DrawerItemView({model: item});
 			});
-		},
+		}
 
-		hideDrawer: function() {
+		/*hideDrawer: function() {
 			Adapt.trigger('popup:closed');
 			$('html').css('overflow-y', 'scroll');
-			
 			if ($('html').hasClass('ie8')) {
 				$('body').css({"left":0});
 				$(this).css({'position':'static', 'overflow': 'visible'});
@@ -101,7 +136,7 @@ define(function(require) {
 				$('.navigation').animate({"left": 0});
 				this.$el.animate({'right': -320});
 			}
-		}
+		}*/
 
 	});
 

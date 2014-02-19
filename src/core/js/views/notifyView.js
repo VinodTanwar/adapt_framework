@@ -88,6 +88,16 @@ define(function(require) {
 
 	});
 
+	// Must delete
+	Adapt.on('pageView:ready', function() {
+		var popupObject = {
+		    title: "Popup title",
+		    body: "This is a popup to add additional information - please close me by pressing the 'x'"
+		};
+
+		Adapt.trigger('notify:popup', popupObject);
+	})
+
 	return NotifyView;
 
 });
