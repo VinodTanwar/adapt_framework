@@ -77,6 +77,7 @@ define(function(require) {
 		},
 
 		emptyDrawer: function() {
+			Adapt.trigger('drawer:emptyDrawer');
 			this.$('.drawer-holder').empty();
 		},
 
@@ -111,6 +112,7 @@ define(function(require) {
 
 		initialize: function() {
 			this.render();
+			this.listenTo(Adapt, 'drawer:emptyDrawer', this.remove);
 		},
 
 		events: {
@@ -120,13 +122,12 @@ define(function(require) {
 		render: function() {
 			var data = this.model.toJSON();
 			var template = Handlebars.templates['drawerItem']
-            $(this.el).html(template(data)).appendTo('.drawer-inner');
+            $(this.el).html(template(data)).appendTo('.drawer-holder');
             return this;
 		},
 
 		onDrawerItemClicked: function(event) {
 			event.preventDefault();
-			console.log(this.model.get('eventCallback'));
 			var eventCallback = this.model.get('eventCallback');
 			Adapt.trigger(eventCallback);
 		}
