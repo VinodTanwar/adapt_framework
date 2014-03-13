@@ -26,6 +26,7 @@
         "media": {
             "mp4": "course/en/video/big_buck_bunny.mp4",
             "ogv": "course/en/video/big_buck_bunny.ogv",
+            "poster": "course/en/video/buck-bunny-poster.jpg",
             "_allowCompletionOnInview":true
         },
         "_pageLevelProgress": {
