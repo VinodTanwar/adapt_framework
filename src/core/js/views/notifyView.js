@@ -15,6 +15,7 @@ define(function(require) {
 		initialize: function() {
 			this.listenTo(Adapt, 'remove', this.remove);
       		this.listenTo(Adapt, 'device:resize', this.resetNotifySize);
+      		Adapt.trigger('popup:opened');
 			this.render();
 		},
 
